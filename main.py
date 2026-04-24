@@ -15,53 +15,39 @@ pd.read_sql("""SELECT * FROM planets; """, conn1)
 # CodeGrade step1
 # Replace None with your code
 df_no_moons = pd.read_sql("""
-                          SELECT * FROM planets
-                          WHERE num_of_moons =0;
-                          """
-                          ,conn1)
+SELECT * FROM planets
+WHERE num_of_moons =0;
+""",conn1)
 
 # CodeGrade step2
 # Replace None with your code
 df_name_seven = pd.read_sql("""
-                            SELECT name, mass
-                            FROM planets
-                            WHERE LENGTH(name) =7
-                            
-                            """
-                            , conn1)
-print(df_name_seven)
+SELECT name, mass FROM planets
+WHERE LENGTH(name) =7;
+""", conn1)
 
 # CodeGrade step3
 # Replace None with your code
 df_mass = pd.read_sql("""
-                    SELECT name, mass
-                    FROM planets
-                    WHERE mass <=1.0;
-                      """
-                      ,conn1)
-print(df_mass)
+SELECT name, mass FROM planets
+WHERE mass <=1.00;
+""",conn1)
 
 # CodeGrade step4
 # Replace None with your code
 df_mass_moon = pd.read_sql("""
-                        SELECT num_of_moons, mass
-                        FROM planets
-                        WHERE num_of_moons > 1
-                        AND
-                        mass < 100;  
-                        """
-                        , conn1)
-print(df_mass_moon)
+SELECT * FROM planets
+WHERE num_of_moons >= 1
+AND
+mass < 1.00;  
+""", conn1)
 
 # CodeGrade step5
 # Replace None with your code
 df_blue = pd.read_sql("""
-                     SELECT name, color
-                     FROM planets 
-                     WHERE color = "blue";
-                      """
-                      , conn1)
-print(df_blue)
+SELECT name, color FROM planets 
+WHERE color LIKE "%blue";
+""", conn1)
 
 # CodeGrade step0
 
@@ -78,36 +64,27 @@ pd.read_sql("SELECT * FROM dogs;", conn2)
 # Replace None with your code
 import sqlite3
 df_hungry = pd.read_sql("""
-                     SELECT name, age , breed
-                     FROM dogs
-                     WHERE hungry = 1
-                     ORDER BY age ASC;
-                     """
-                        ,conn2)
-print(df_hungry)
+SELECT name, age , breed FROM dogs
+WHERE hungry = 1
+ORDER BY age ASC;
+""",conn2)
 
 # CodeGrade step7
 # Replace None with your code
 df_hungry_ages = pd.read_sql("""
-                             SELECT name, age, hungry
-                             FROM dogs
-                             WHERE hungry=1
-                             AND age BETWEEN 2 AND 7
-                             ORDER BY name ASC;
-                             """
-                             ,conn2)
-print(df_hungry)
+SELECT name, age, hungry FROM dogs
+WHERE hungry=1
+AND age BETWEEN 2 AND 7
+ORDER BY name ASC;
+""",conn2)
 
 # CodeGrade step8
 # Replace None with your code
 df_4_oldest = pd.read_sql("""
-                        SELECT name, age, breed
-                        FROM dogs
-                        WHERE age = 4
-                        ORDER BY name ASC;                          
-                          """
-                          , conn2)
-print(df_4_oldest)
+SELECT name, age, breed FROM dogs
+ORDER BY age DESC; 
+LIMIT 4;                         
+""", conn2)
 
 # CodeGrade step0
 
@@ -124,42 +101,34 @@ SELECT * FROM babe_ruth_stats; """, conn3)
 # CodeGrade step9
 # Replace None with your code
 df_ruth_years = pd.read_sql("""
-                        SELECT year
-                        FROM babe_ruth_stats;                            
-                            """
-                            , conn3)
-print(df_ruth_years)
+SELECT COUNT(year) AS total_years
+FROM babe_ruth_stats;                            
+""", conn3)
 
 # CodeGrade step10
 # Replace None with your code
 df_hr_total = pd.read_sql("""
-                        SELECT SUM(HR)
-                        FROM babe_ruth_stats;
-                        """
-                        , conn3)
-print(df_hr_total)
+SELECT SUM(HR)AS total_homeruns
+FROM babe_ruth_stats;
+""", conn3)
 
 # CodeGrade step11
 # Replace None with your code
 df_teams_years = pd.read_sql("""
-                            SELECT team,
-                            COUNT(DISTINCT year) AS number_years
-                            FROM babe_ruth_stats
-                            GROUP BY team;
-                            """
-                            ,conn3)
-print(df_teams_years)
+SELECT team,
+COUNT(year) AS number_years
+FROM babe_ruth_stats
+GROUP BY team;
+""",conn3)
 
 # CodeGrade step12
 # Replace None with your code
 df_at_bats = pd.read_sql("""
-                        SELECT team, at_bats AS average_at_bats
-                        FROM babe_ruth_stats
-                        WHERE at_bats > 200
-                        ORDER BY team ASC;
-                        """
-                        , conn3)
-print(df_at_bats)
+SELECT team, AVG(at_bats) AS average_at_bats
+FROM babe_ruth_stats
+GROUP BY team
+HAVING AVG(at_bats) > 200;
+""", conn3)
 
 # Run this cell without changes
 
